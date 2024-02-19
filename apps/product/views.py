@@ -73,3 +73,12 @@ class ProductFilterListAPIView(APIView):
         serializer = ProductSerializer(objects, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = (SearchFilter, OrderingFilter,)
+    search_fields = ['name']
