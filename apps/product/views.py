@@ -17,3 +17,8 @@ class ProductListAPIView(generics.ListAPIView):
     queryset = Product.objects.all()
     filter_backends = (SearchFilter, OrderingFilter,)
     search_fields = ['name']
+
+
+class ProductCreateAPIView(generics.CreateAPIView):
+    serializer_class = ProductCreateSerializer
+    permission_classes = [permissions.AllowAny]
