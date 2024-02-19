@@ -54,3 +54,10 @@ class ProductUpdateAPIView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProductSerializer
     lookup_field = 'pk'
+
+class ProductDeleteAPIView(generics.DestroyAPIView):
+    queryset = Product.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+
