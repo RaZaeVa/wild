@@ -61,3 +61,15 @@ class ProductDeleteAPIView(generics.DestroyAPIView):
     serializer_class = ProductSerializer
     lookup_field = 'pk'
 
+
+class ProductFilterListAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        if request.query_params.get('search'):
+            objects = Product.objects.filter(name__contains=request.query_params.get('search'))
+        else:
+            objects = Product.objects.all()
+        serializer = ProductSerializer(objects, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
