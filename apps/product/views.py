@@ -103,3 +103,12 @@ class CartUpdateAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CartResetAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def put(self, request, id):
+        snippet = Cart.objects.get(user_id=id)
+        snippet.save()
+        return Response({"response": 'reset was successfull'}, status=status.HTTP_200_OK)
