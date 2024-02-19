@@ -33,3 +33,7 @@ class CartSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class CartUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = "__all__"
