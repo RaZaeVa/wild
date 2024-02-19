@@ -49,3 +49,8 @@ class CategoryCreateAPIView(APIView):
         return Response({'response': 'created'}, status=status.HTTP_201_CREATED)
 
 
+class ProductUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = Product.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
